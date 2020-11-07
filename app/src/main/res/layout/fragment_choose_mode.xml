@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="10"
+    tools:context=".fragments.ChooseModeFragment">
+
+
+    <Button
+        android:id="@+id/btn_client"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="2"
+        android:background="@drawable/button_ok_state"
+        android:text="@string/cliente"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@id/gl_endBtns"
+        app:layout_constraintStart_toStartOf="@id/gl_startBtns"
+
+        app:layout_constraintTop_toTopOf="@id/gl_bottom_btn1"
+        />
+
+
+    <Button
+        android:id="@+id/btn_servidor"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:background="@drawable/button_cancel_state"
+        android:text="@string/servidor"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@id/gl_endBtns"
+        app:layout_constraintStart_toStartOf="@id/gl_startBtns"
+        app:layout_constraintBottom_toBottomOf="@id/gl_bottom_btn2"
+
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_startBtns"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".25" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_endBtns"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".75" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_bottom_btn1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".25" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_bottom_btn2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".75" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
