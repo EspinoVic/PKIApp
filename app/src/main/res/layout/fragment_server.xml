@@ -18,6 +18,16 @@
         app:layout_constraintTop_toTopOf="@id/gl_topIP"
         />
 
+    <TextView
+        android:id="@+id/lbl_msj_recibido_codificado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/mensaje_codificado_recibido"
+        android:textSize="25sp"
+        android:layout_margin="@dimen/margin_components"
+        app:layout_constraintTop_toBottomOf="@id/lbl_connectIP"
+        />
+
     <LinearLayout
         android:id="@+id/ll_data"
         android:layout_width="match_parent"
@@ -25,12 +35,12 @@
         android:orientation="horizontal"
         android:weightSum="5"
         android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/lbl_connectIP"
+        app:layout_constraintTop_toBottomOf="@id/lbl_msj_recibido_codificado"
         android:layout_margin="@dimen/margin_components"
 
         >
         <EditText
-            android:id="@+id/msj_a_codificar"
+            android:id="@+id/txt_msj_decodificado"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:inputType="text"
@@ -43,7 +53,7 @@
             />
 
         <EditText
-            android:id="@+id/txt_key_para_codificar"
+            android:id="@+id/txt_key_decodificar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
@@ -55,34 +65,37 @@
             />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/lbl_msj_codificado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:minLines="1"
-        android:maxLines="10"
-        android:hint="@string/mensaje_codificado"
-        app:layout_constraintTop_toBottomOf="@+id/ll_data"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        android:layout_margin="@dimen/margin_components"
-        android:textSize="18sp"
-        />
     <Button
-        android:id="@+id/btn_send_msj"
+        android:id="@+id/btn_decodificar"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="2"
         android:background="@drawable/button_ok_state"
-        android:text="@string/enviar"
+        android:text="@string/decodificar"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintTop_toBottomOf="@id/lbl_msj_codificado"
+        app:layout_constraintTop_toBottomOf="@id/ll_data"
+        android:layout_margin="@dimen/margin_components"
+
+        />
+
+
+    <Button
+        android:id="@+id/btn_open_connection"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="2"
+        android:background="@drawable/button_ok_state"
+        android:text="@string/abrir_conexi_n"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintTop_toBottomOf="@id/btn_decodificar"
         android:layout_margin="@dimen/margin_components"
 
         />
@@ -94,6 +107,20 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.05" />
 
+    <ProgressBar
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:id="@+id/progress_circular_opnening_connection"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5"
+        android:translationZ="10dp"
+        android:theme="@style/progress"
+        android:indeterminate="true"
+        android:visibility="gone"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
