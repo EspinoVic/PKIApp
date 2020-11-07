@@ -11,6 +11,38 @@
         android:id="@+id/chooseModeFragment"
         android:name="com.example.pkiapp.fragments.ChooseModeFragment"
         android:label="fragment_choose_mode"
-        tools:layout="@layout/fragment_choose_mode" />
+        tools:layout="@layout/fragment_choose_mode" >
+        <action
+            android:id="@+id/action_chooseModeFragment_to_clientFragment"
+            app:destination="@id/clientFragment"
+
+            app:enterAnim="@anim/enter_slide_from_right"
+            app:exitAnim="@anim/exit_slide_to_left"
+
+            app:popExitAnim="@anim/exit_slide_to_rigth"
+            app:popEnterAnim="@anim/enter_slide_from_left"
+            />
+        <action
+            android:id="@+id/action_chooseModeFragment_to_serverFragment"
+            app:destination="@id/serverFragment"
+
+            app:enterAnim="@anim/enter_slide_from_right"
+            app:exitAnim="@anim/exit_slide_to_left"
+
+            app:popExitAnim="@anim/exit_slide_to_rigth"
+            app:popEnterAnim="@anim/enter_slide_from_left"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/clientFragment"
+        android:name="com.example.pkiapp.ClientFragment"
+        android:label="fragment_client"
+        tools:layout="@layout/fragment_client" />
+    <fragment
+        android:id="@+id/serverFragment"
+        android:name="com.example.pkiapp.fragments.ServerFragment"
+        android:label="fragment_server"
+        tools:layout="@layout/fragment_server" />
+
 
 </navigation>
