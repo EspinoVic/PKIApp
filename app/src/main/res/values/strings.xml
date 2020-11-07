@@ -10,4 +10,8 @@
     <string name="llave">Llave</string>
     <string name="mensaje_codificado">Mensaje codificado</string>
     <string name="mensaje_codificado_recibido">mensaje codificado recibido</string>
+    <string name="ip_to_connect">ip a conectar</string>
+    <string name="port_number">port</string>
+    <string name="conectar">Conectar</string>
+    <string name="decodificar">decodificar</string>
 </resources>

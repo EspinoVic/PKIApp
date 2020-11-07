@@ -7,4 +7,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="progress" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorAccent">#006BBD</item>
+    </style>
+
 </resources>
