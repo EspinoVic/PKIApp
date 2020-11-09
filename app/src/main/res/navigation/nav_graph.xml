@@ -35,7 +35,7 @@
     </fragment>
     <fragment
         android:id="@+id/clientFragment"
-        android:name="com.example.pkiapp.ClientFragment"
+        android:name="com.example.pkiapp.fragments.ClientFragment"
         android:label="fragment_client"
         tools:layout="@layout/fragment_client" />
     <fragment

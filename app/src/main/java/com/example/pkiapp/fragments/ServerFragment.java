@@ -17,6 +17,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.pkiapp.Cesar;
 import com.example.pkiapp.R;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -91,12 +92,13 @@ public class ServerFragment extends Fragment {
                                 char data[] = new char[254];
                                 String mensaje="";
                                 //mientras reciba data, la irá appendiando
-                                while(in.read(data)!=-1){
-                                    mensaje += String.valueOf(data);
+                                int readLength = in.read(data);
+                                while(readLength!=-1){
+                                    mensaje += String.valueOf(data,0,readLength);
                                     data = new char[254];
-                                    serverViewModel.getMsjCodifiedLiveData().postValue(String.valueOf(mensaje.split("\n")[0]));
+                                    serverViewModel.getMsjCodifiedLiveData().postValue(String.valueOf(mensaje));
                                     mensaje = "";
-
+                                    readLength = in.read(data);
                                 }
 
                            // }
@@ -122,7 +124,8 @@ public class ServerFragment extends Fragment {
         this.btnDecodificar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                String messgge= Cesar.desencriptar(lbl_msj_recibido_codificado.getText().toString(),Integer.parseInt(txt_key_decodificar.getText().toString()));
+                txt_msj_decodificado.setText(messgge);
             }
         });
 
@@ -143,7 +146,10 @@ public class ServerFragment extends Fragment {
             public void onChanged(String messgge) {
                 if(messgge!=null){
                     lbl_msj_recibido_codificado.setText(messgge);
-                    decodificarMensaje();
+                    txt_msj_decodificado.setText(
+
+                            Cesar.desencriptar(messgge,Integer.parseInt(txt_key_decodificar.getText().toString()))
+                    );
                 }
 
             }
@@ -152,10 +158,6 @@ public class ServerFragment extends Fragment {
         return viewRoot;
     }
 
-    public void decodificarMensaje(){
-        //logic
-        this.txt_key_decodificar.setText("Mensaje decodificado v:");
-    }
 
     private String getLocalIpAddress() throws UnknownHostException {
         WifiManager wifiManager = (WifiManager) getActivity().getApplicationContext().getSystemService(WIFI_SERVICE);
@@ -164,7 +166,24 @@ public class ServerFragment extends Fragment {
             int ipInt = wifiInfo.getIpAddress();
             return InetAddress.getByAddress(ByteBuffer.allocate(4).order(ByteOrder.LITTLE_ENDIAN).putInt(ipInt).array()).getHostAddress();
         }
-
         return null;
     }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if(socketForReceiving!=null) {
+            try {
+                socketForReceiving.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
 }

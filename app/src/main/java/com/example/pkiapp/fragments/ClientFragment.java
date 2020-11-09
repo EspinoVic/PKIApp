@@ -1,4 +1,4 @@
-package com.example.pkiapp;
+package com.example.pkiapp.fragments;
 
 import android.os.Bundle;
 
@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.pkiapp.Cesar;
+import com.example.pkiapp.R;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.DataOutputStream;
@@ -61,7 +63,14 @@ public class ClientFragment extends Fragment {
 
                     outputStreamSending = socketForSending.getOutputStream();
                     DataOutputStream dataOutputStream = new DataOutputStream(outputStreamSending);
-                    dataOutputStream.writeUTF(codificarMsj(txt_msj_a_codificar.getText().toString()));
+                    String mensajeCodificado = Cesar.encriptar(
+                            txt_msj_a_codificar.getText().toString(),
+                            Integer.parseInt(txt_key_para_codificar.getText().toString())
+                    );
+                    lbl_msj_codificado.setText(mensajeCodificado);
+                    dataOutputStream.write(
+                            mensajeCodificado.getBytes()
+                    );
                     dataOutputStream.flush();
                     /*dataOutputStream.close();*/
                 } catch (IOException e) {
@@ -108,7 +117,21 @@ public class ClientFragment extends Fragment {
         return viewRoot;
     }
 
-    private String codificarMsj(String toString) {
-        return toString;
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if(socketForSending!=null) {
+            try {
+                socketForSending.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 }
