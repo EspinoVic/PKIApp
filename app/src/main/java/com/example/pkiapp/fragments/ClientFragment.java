@@ -52,15 +52,14 @@ public class ClientFragment extends Fragment {
         this.txt_key_para_codificar = viewRoot.findViewById(R.id.txt_key_para_codificar);
         this.lbl_msj_codificado = viewRoot.findViewById(R.id.lbl_msj_codificado);
 
+        this.txt_ip_server = viewRoot.findViewById(R.id.txt_ip_server);
+        this.txt_puerto = viewRoot.findViewById(R.id.txt_puerto);
+
         this.btn_send_msj = viewRoot.findViewById(R.id.btn_send_msj);
         this.btn_send_msj.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
-/*
-                    outputStreamSending.write(codificarMsj(txt_msj_a_codificar.getText().toString()).getBytes());
-*/
-
                     outputStreamSending = socketForSending.getOutputStream();
                     DataOutputStream dataOutputStream = new DataOutputStream(outputStreamSending);
                     String mensajeCodificado = Cesar.encriptar(
@@ -79,12 +78,6 @@ public class ClientFragment extends Fragment {
                 }
             }
         });
-
-
-
-        this.txt_ip_server = viewRoot.findViewById(R.id.txt_ip_server);
-        this.txt_puerto = viewRoot.findViewById(R.id.txt_puerto);
-
         this.btnConectarServer = viewRoot.findViewById(R.id.btn_connect);
         this.btnConectarServer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,8 +92,6 @@ public class ClientFragment extends Fragment {
                             socketForSending = new Socket(txt_ip_server.getText().toString(),Integer.parseInt(txt_puerto.getText().toString()));
                             outputStreamSending = socketForSending.getOutputStream();
                             Snackbar.make(view,"Connected.",Snackbar.LENGTH_SHORT).show();
-
-
                         } catch (IOException e) {
                             e.printStackTrace();
                             Snackbar.make(view,"Cant connect that address.",Snackbar.LENGTH_SHORT).show();

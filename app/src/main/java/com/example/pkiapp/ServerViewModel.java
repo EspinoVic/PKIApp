@@ -1,4 +1,4 @@
-package com.example.pkiapp.fragments;
+package com.example.pkiapp;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;

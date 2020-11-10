@@ -15,10 +15,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.pkiapp.Cesar;
 import com.example.pkiapp.R;
+import com.example.pkiapp.ServerViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.BufferedReader;
