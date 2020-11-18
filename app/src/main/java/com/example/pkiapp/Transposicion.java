@@ -117,7 +117,7 @@ public class Transposicion {
 
     private static int[] getRandomNumbersMultipliedLargerThanMsg(int lengthMessage) {
 
-        Random random = new Random(LocalDateTime.now().getSecond());
+        Random random = new Random(System.currentTimeMillis());
         /*
         Numbers smaller than lengthMessage
         but multiplied larger than lenght

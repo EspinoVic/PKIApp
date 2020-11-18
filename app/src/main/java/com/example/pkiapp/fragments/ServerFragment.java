@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.example.pkiapp.Cesar;
 import com.example.pkiapp.R;
 import com.example.pkiapp.ServerViewModel;
+import com.example.pkiapp.Transposicion;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.BufferedReader;
@@ -137,7 +138,7 @@ public class ServerFragment extends Fragment {
         this.btnDecodificar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String messgge= Cesar.desencriptar(lbl_msj_recibido_codificado.getText().toString(),Integer.parseInt(txt_key_decodificar.getText().toString()));
+                String messgge= getMsgDecifrado(lbl_msj_recibido_codificado.getText().toString());
                 txt_msj_decodificado.setText(messgge);
             }
         });
@@ -160,8 +161,7 @@ public class ServerFragment extends Fragment {
                 if(messgge!=null){
                     lbl_msj_recibido_codificado.setText(messgge);
                     txt_msj_decodificado.setText(
-                            /*getMsgDecifrado()*/
-                            Cesar.desencriptar(messgge,Integer.parseInt(txt_key_decodificar.getText().toString()))
+                            getMsgDecifrado(messgge)
                     );
                 }
 
@@ -172,14 +172,32 @@ public class ServerFragment extends Fragment {
     }
 
 
-   /* public String getMsgDecifrado(){
-        *//**
+    public String getMsgDecifrado(String messgge){
+        /**
          * if X method select, do something an return
          * otherwise
          * do other thing
-         *//*
+         */
+
+        String methodSelected = (String) spinnerDecryptMethod.getSelectedItem();
+        String output = "ERROR";
+        switch (methodSelected){
+            case "Cesar":
+                output = Cesar.desencriptar(messgge,Integer.parseInt(txt_key_decodificar.getText().toString()));
+
+                break;
+            case "transposicion_simetrica":
+            case "transposicion_asimetrica":
+                try {
+                    output = Transposicion.decifrar(messgge);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+        }
+
+        return output;
     }
-*/
     private String getLocalIpAddress() throws UnknownHostException {
         WifiManager wifiManager = (WifiManager) getActivity().getApplicationContext().getSystemService(WIFI_SERVICE);
         if(wifiManager!= null){

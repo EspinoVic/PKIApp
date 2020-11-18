@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.pkiapp.Cesar;
 import com.example.pkiapp.R;
+import com.example.pkiapp.Transposicion;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.DataOutputStream;
@@ -74,10 +75,8 @@ public class ClientFragment extends Fragment {
                 try {
                     outputStreamSending = socketForSending.getOutputStream();
                     DataOutputStream dataOutputStream = new DataOutputStream(outputStreamSending);
-                    String mensajeCodificado = Cesar.encriptar(
-                            txt_msj_a_codificar.getText().toString(),
-                            Integer.parseInt(txt_key_para_codificar.getText().toString())
-                    );
+                    String mensajeCodificado = getMsgCifrado(txt_msj_a_codificar.getText().toString());
+
                     lbl_msj_codificado.setText(mensajeCodificado);
                     dataOutputStream.write(
                             mensajeCodificado.getBytes()
@@ -120,6 +119,38 @@ public class ClientFragment extends Fragment {
         return viewRoot;
     }
 
+    public String getMsgCifrado(String messgge){
+        /**
+         * if X method select, do something an return
+         * otherwise
+         * do other thing
+         */
+
+        String methodSelected = (String) spinnerDecryptMethod.getSelectedItem();
+        String output = "ERROR";
+        switch (methodSelected){
+            case "Cesar":
+                output = Cesar.encriptar(messgge,Integer.parseInt(txt_key_para_codificar.getText().toString()));
+
+                break;
+            case "transposicion_simetrica":
+                try {
+                    output = Transposicion.cifrar(messgge,true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+            case "transposicion_asimetrica":
+                try {
+                    output = Transposicion.cifrar(messgge,false);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+        }
+
+        return output;
+    }
 
     @Override
     public void onDestroyView() {
@@ -128,6 +159,7 @@ public class ClientFragment extends Fragment {
             try {
                 socketForSending.close();
             } catch (IOException e) {
+
                 e.printStackTrace();
             }
         }

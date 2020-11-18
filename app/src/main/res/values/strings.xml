@@ -18,7 +18,9 @@
 
     <string-array name="encrypt_method">
         <item>Cesar</item>
-        <item>Transposición</item>
+        <item>transposicion_simetrica</item>
+        <item>transposicion_asimetrica</item>
+
     </string-array>
 
 </resources>
