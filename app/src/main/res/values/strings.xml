@@ -15,4 +15,10 @@
     <string name="conectar">Conectar</string>
     <string name="decodificar">decodificar</string>
     <string name="abrir_conexi_n">Abrir conexión</string>
+
+    <string-array name="encrypt_method">
+        <item>Cesar</item>
+        <item>Transposición</item>
+    </string-array>
+
 </resources>

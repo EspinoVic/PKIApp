@@ -11,9 +11,12 @@ import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.pkiapp.Cesar;
@@ -49,7 +52,8 @@ public class ServerFragment extends Fragment {
 
     ServerViewModel serverViewModel;
 
-    boolean conexionAbierta = true;
+    Spinner spinnerDecryptMethod;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +63,15 @@ public class ServerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View viewRoot = inflater.inflate(R.layout.fragment_server, container, false);
+
+        this.spinnerDecryptMethod = viewRoot.findViewById(R.id.spinner_encrypt_method);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                getContext(),
+                R.array.encrypt_method, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        this.spinnerDecryptMethod .setAdapter(adapter);
+        this.spinnerDecryptMethod.setSelection(0);
+
 
         this.lbl_connectIP = viewRoot.findViewById(R.id.lbl_connectIP);
         this.lbl_msj_recibido_codificado = viewRoot.findViewById(R.id.lbl_msj_recibido_codificado);
@@ -147,7 +160,7 @@ public class ServerFragment extends Fragment {
                 if(messgge!=null){
                     lbl_msj_recibido_codificado.setText(messgge);
                     txt_msj_decodificado.setText(
-
+                            /*getMsgDecifrado()*/
                             Cesar.desencriptar(messgge,Integer.parseInt(txt_key_decodificar.getText().toString()))
                     );
                 }
@@ -159,6 +172,14 @@ public class ServerFragment extends Fragment {
     }
 
 
+   /* public String getMsgDecifrado(){
+        *//**
+         * if X method select, do something an return
+         * otherwise
+         * do other thing
+         *//*
+    }
+*/
     private String getLocalIpAddress() throws UnknownHostException {
         WifiManager wifiManager = (WifiManager) getActivity().getApplicationContext().getSystemService(WIFI_SERVICE);
         if(wifiManager!= null){
