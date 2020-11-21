@@ -20,7 +20,7 @@
         <item>Cesar</item>
         <item>transposicion_simetrica</item>
         <item>transposicion_asimetrica</item>
-
+        <item>Cifrado propio</item>
     </string-array>
 
 </resources>

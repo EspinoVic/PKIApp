@@ -14,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.pkiapp.Cesar;
+import com.example.pkiapp.CifradoPropio;
 import com.example.pkiapp.R;
 import com.example.pkiapp.Transposicion;
 import com.google.android.material.snackbar.Snackbar;
@@ -146,6 +147,9 @@ public class ClientFragment extends Fragment {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                break;
+            case "Cifrado propio":
+                output = CifradoPropio.cifrar(messgge);
                 break;
         }
 
