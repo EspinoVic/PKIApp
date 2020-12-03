@@ -21,6 +21,8 @@
         <item>transposicion_simetrica</item>
         <item>transposicion_asimetrica</item>
         <item>Cifrado propio</item>
+        <item>Vigerene</item>
+
     </string-array>
 
 </resources>

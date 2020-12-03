@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,11 +18,12 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.pkiapp.Cesar;
-import com.example.pkiapp.CifradoPropio;
+import com.example.pkiapp.cifrados.Cesar;
+import com.example.pkiapp.cifrados.CifradoPropio;
 import com.example.pkiapp.R;
 import com.example.pkiapp.ServerViewModel;
-import com.example.pkiapp.Transposicion;
+import com.example.pkiapp.cifrados.Transposicion;
+import com.example.pkiapp.cifrados.Vigerene;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.BufferedReader;
@@ -198,6 +198,14 @@ public class ServerFragment extends Fragment {
             case "Cifrado propio":
                 output = CifradoPropio.decifrar(messgge);
                 break;
+            case "Vigerene"  :
+                try {
+                    output = Vigerene.decifrar(messgge);
+                } catch (Exception e) {
+                    output = "ERROR decifre Vigerene";
+                    e.printStackTrace();
+                }
+            break;
         }
 
         return output;

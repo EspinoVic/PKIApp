@@ -1,4 +1,4 @@
-package com.example.pkiapp;
+package com.example.pkiapp.cifrados;
 
 import java.time.LocalDateTime;
 import java.util.Random;

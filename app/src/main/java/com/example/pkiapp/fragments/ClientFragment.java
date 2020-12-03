@@ -13,10 +13,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.pkiapp.Cesar;
-import com.example.pkiapp.CifradoPropio;
+import com.example.pkiapp.cifrados.Cesar;
+import com.example.pkiapp.cifrados.CifradoPropio;
 import com.example.pkiapp.R;
-import com.example.pkiapp.Transposicion;
+import com.example.pkiapp.cifrados.Transposicion;
+import com.example.pkiapp.cifrados.Vigerene;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.DataOutputStream;
@@ -150,6 +151,14 @@ public class ClientFragment extends Fragment {
                 break;
             case "Cifrado propio":
                 output = CifradoPropio.cifrar(messgge);
+                break;
+            case "Vigerene"  :
+                try {
+                    output = Vigerene.cifrar(messgge);
+                } catch (Exception e) {
+                    output = "ERROR cifrado Vigerene";
+                    e.printStackTrace();
+                }
                 break;
         }
 
